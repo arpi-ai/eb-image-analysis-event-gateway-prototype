@@ -5,6 +5,7 @@ plugins {
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.5.3"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("com.palantir.git-version") version "3.1.0"
 }
 
 group = "ai.arpi"
@@ -52,10 +53,14 @@ tasks.withType<Test> {
 
 val registry = "arpi-registry.kr.ncr.ntruss.com"
 val repository = "prototype/${project.name}"
+val gitVersion: groovy.lang.Closure<String> by extra
+val versionDetails: groovy.lang.Closure<out com.palantir.gradle.gitversion.VersionDetails> by extra
+
+val commitHash = versionDetails().gitHash.substring(0, 8)
 
 gradle.projectsEvaluated {
 	tasks.named<BootBuildImage>("bootBuildImage") {
-		imageName.set("$registry/$repository:${project.version}")
+		imageName.set("$registry/$repository:$commitHash")
 		tags.add("$registry/$repository:latest")
 
 		publish.set(true)

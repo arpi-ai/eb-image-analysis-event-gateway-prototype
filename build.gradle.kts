@@ -51,7 +51,7 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-val registry = "arpi-registry.kr.ncr.ntruss.com"
+val registry = "eb-registry.kr.ncr.ntruss.com"
 val repository = "prototype/${project.name}"
 val gitVersion: groovy.lang.Closure<String> by extra
 val versionDetails: groovy.lang.Closure<out com.palantir.gradle.gitversion.VersionDetails> by extra

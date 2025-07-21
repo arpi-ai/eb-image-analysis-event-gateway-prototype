@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: eb-image-analysis-event-gateway-prototype
+server:
+  port: ${SERVER_PORT:28080}
